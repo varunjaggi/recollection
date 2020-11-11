@@ -11,23 +11,30 @@ const MongoStore = require('connect-mongo')(session)
 const passport = require('passport')
 //loading config
 dotenv.config({path: './config/config.env'})
-
+app.use(passport.initialize());
 // Passport config
 require('./config/passport')(passport)
 
+connectDB()
+
+//Sessions
 app.use(
     session({
       secret: 'nuggets',
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized:true,
       store: new MongoStore({ mongooseConnection: mongoose.connection }),
     })
   )
 
+app.use(passport.initialize())
+app.use(passport.session())
+
+
 app.use(express.static(path.join(__dirname,'public')))
 
 app.use(morgan('dev'))
-connectDB()
+
 
 //Handle bar extensions
 app.engine(

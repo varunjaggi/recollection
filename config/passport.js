@@ -8,10 +8,31 @@ module.exports = function (passport) {
       {
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SEC,
-        callbackURL: '/auth/google/callback',
+        callbackURL: 'http://localhost:8080/auth/google/callback',
       },
       async (accessToken, refreshToken, profile, done) => {
-       console.log(profile)
+        console.log(profile)
+        const newUser ={
+         googleID: profile.id,
+         displayName: profile.displayName,
+         firstName: profile.name.givenName,
+         lastName: profile.name.familyName
+       }
+       console.log(newUser)
+       try {
+        let user = await User.findOne({ googleId: newUser.googleId })
+
+        if (user) {
+          done(null, user)
+        } 
+        else {
+          user = await User.create(newUser)
+          done(null, user)
+        }
+      } catch (err) {
+        console.error(err)
+      }
+
       }
     )
   )
