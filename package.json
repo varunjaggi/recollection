@@ -4,7 +4,7 @@
   "description": "App to put your memories ",
   "main": "app.js",
   "scripts": {
-    "start": "node app",
+    "start": "nodemon app",
     "live": "nodemon app"
   },
   "author": "varunjaggi",
@@ -15,10 +15,13 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
+    "gridfs-stream": "^1.1.1",
     "method-override": "^3.0.0",
     "moment": "^2.29.1",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "multer-gridfs-storage": "^4.2.0",
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "passport-google": "^0.3.0",

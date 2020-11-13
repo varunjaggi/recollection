@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const exphbs = require('express-handlebars')
 const path = require('path')
 const app = express()
+const bodyParser = require('body-parser');
 const session = require('express-session')
 const mongoose = require("mongoose")
 const MongoStore = require('connect-mongo')(session)
@@ -15,6 +16,10 @@ app.use(passport.initialize());
 // Passport config
 require('./config/passport')(passport)
 
+// Body parser
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+app.use(bodyParser.json());
 connectDB()
 
 //Sessions

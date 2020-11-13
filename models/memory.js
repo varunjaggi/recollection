@@ -14,12 +14,11 @@ const memorySchema = new mongoose.Schema({
         default: 'private',
         enum: ['public', 'private']
     },
-    Date: {
+    date: {
         type:Date
     },
     img: 
     { 
-        data: Buffer, 
         type: String 
     },
     createdAt: {
